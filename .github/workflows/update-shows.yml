@@ -11,11 +11,13 @@ permissions:
 jobs:
   update-shows:
     runs-on: ubuntu-latest
+
     env:
       BANDSINTOWN_ARTIST: "id_15611636"
       BANDSINTOWN_API_KEY: ${{ secrets.BANDSINTOWN_API_KEY }}
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Fetch upcoming shows
         run: |
@@ -28,27 +30,42 @@ jobs:
 
           artist = os.environ["BANDSINTOWN_ARTIST"]
           api_key = os.environ["BANDSINTOWN_API_KEY"]
+
           encoded_artist = urllib.parse.quote(artist, safe="_")
-          url = f"https://rest.bandsintown.com/artists/{encoded_artist}/events/?app_id={urllib.parse.quote(api_key)}"
+
+          url = (
+              f"https://rest.bandsintown.com/artists/"
+              f"{encoded_artist}/events/?app_id="
+              f"{urllib.parse.quote(api_key)}"
+          )
 
           with urllib.request.urlopen(url, timeout=30) as response:
-            events = json.loads(response.read().decode("utf-8"))
+              events = json.loads(response.read().decode("utf-8"))
 
           if isinstance(events, dict):
-            events = []
+              events = []
 
           output = "window.SNAKEPISS_SHOWS = "
           output += json.dumps(events, ensure_ascii=False, indent=2)
           output += ";\n"
 
           pathlib.Path("data").mkdir(exist_ok=True)
-          pathlib.Path("data/shows.js").write_text(output, encoding="utf-8")
+
+          pathlib.Path("data/shows.js").write_text(
+              output,
+              encoding="utf-8"
+          )
           PY
 
       - name: Commit updated shows
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add data/shows.js
+
           git diff --cached --quiet || git commit -m "Update Bandsintown shows"
+
+          git pull --rebase origin main
+
           git push
