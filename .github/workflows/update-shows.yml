@@ -12,7 +12,7 @@ jobs:
   update-shows:
     runs-on: ubuntu-latest
     env:
-      BANDSINTOWN_ARTIST: SNAKEPISS
+      BANDSINTOWN_ARTIST: "id_15611636"
       BANDSINTOWN_API_KEY: ${{ secrets.BANDSINTOWN_API_KEY }}
     steps:
       - uses: actions/checkout@v4
