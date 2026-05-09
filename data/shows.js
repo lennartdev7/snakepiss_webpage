@@ -20,7 +20,7 @@ window.SNAKEPISS_SHOWS = [
       "image_url": "https://photos.bandsintown.com/large/22661828.jpeg",
       "tracker_count": 20,
       "tracking": [],
-      "upcoming_event_count": 2,
+      "upcoming_event_count": 6,
       "url": "https://www.bandsintown.com/a/15611636?came_from=267&app_id=c34d7ee904afbff9705a01c22a58a49c",
       "support_url": "",
       "show_multi_ticket": true,
