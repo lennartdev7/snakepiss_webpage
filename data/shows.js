@@ -18,7 +18,7 @@ window.SNAKEPISS_SHOWS = [
       "mbid": "",
       "facebook_page_url": "",
       "image_url": "https://photos.bandsintown.com/large/22661828.jpeg",
-      "tracker_count": 20,
+      "tracker_count": 21,
       "tracking": [],
       "upcoming_event_count": 5,
       "url": "https://www.bandsintown.com/a/15611636?came_from=267&app_id=c34d7ee904afbff9705a01c22a58a49c",
